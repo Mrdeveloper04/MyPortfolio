@@ -1,0 +1,747 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>JAMMI SANGEETHA RAO — Portfolio</title>
+  <meta name="description" content="Portfolio of Your Name — web developer / student / designer" />
+
+  <!-- Google font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ======================
+       THEME / RESET / BASE
+       ====================== */
+    :root{
+      --bg: #0f1720;
+      --panel: rgba(255,255,255,0.03);
+      --card: #0f1418;
+      --muted: #c7d0da;
+      --muted-2: #9aa4b2;
+      --accent: #58a6ff;
+      --accent-2: #6ce1ff;
+      --glass: rgba(255,255,255,0.04);
+      --glass-2: rgba(255,255,255,0.02);
+      --shadow: 0 8px 30px rgba(2,6,12,0.6);
+      --radius: 14px;
+      --max-width: 1100px;
+      --transition-fast: 180ms;
+      --transition-medium: 420ms;
+      --transition-slow: 800ms;
+      --nav-height: 78px;
+    }
+    /* light theme variant */
+    [data-theme="light"]{
+      --bg: #fbfbfc;
+      --panel: rgba(255,255,255,0.6);
+      --card: #ffffff;
+      --muted: #333842;
+      --muted-2: #666b75;
+      --accent: #0b76ef;
+      --accent-2: #6ce1ff;
+      --glass: rgba(255,255,255,0.6);
+      --glass-2: rgba(0,0,0,0.03);
+      --shadow: 0 6px 20px rgba(18,24,40,0.06);
+    }
+
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      :root {
+        --transition-fast: 1ms;
+        --transition-medium: 1ms;
+        --transition-slow: 1ms;
+      }
+      * { animation-duration: 1ms !important; transition-duration: 1ms !important; scroll-behavior: auto !important; }
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(88,166,255,0.06), transparent),
+                  radial-gradient(900px 500px at 90% 90%, rgba(108,225,255,0.03), transparent),
+                  linear-gradient(180deg,var(--bg),var(--bg));
+      color:var(--muted);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      padding-bottom:96px;
+      transition: background var(--transition-medium) ease, color var(--transition-medium) ease;
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block;border-radius:10px}
+
+    /* ========= container ========= */
+    .container{max-width:var(--max-width);margin:0 auto;padding:20px 24px;}
+    header {
+      position:fixed;left:0;right:0;top:12px;z-index:60;backdrop-filter: blur(6px);
+      display:flex;justify-content:center;pointer-events:none;
+    }
+    .nav-wrap{width:100%;max-width:var(--max-width);padding:8px 12px;pointer-events:auto;}
+    .nav{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      background:linear-gradient(180deg,var(--panel),transparent);padding:10px 12px;border-radius:12px;
+      transition: box-shadow var(--transition-fast), transform var(--transition-fast);
+    }
+    .nav.sticky{box-shadow:var(--shadow);transform:translateY(-2px)}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{
+      width:75px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:18px;
+      box-shadow: 0 8px 24px rgba(11,118,239,0.12);
+    }
+
+    nav ul{display:flex;gap:8px;list-style:none;margin:0;padding:0;align-items:center}
+    nav li{position:relative}
+    nav a{
+      padding:8px 10px;border-radius:8px;color:var(--muted-2);font-weight:600;font-size:14px;display:inline-block;
+      transition: color var(--transition-fast), transform var(--transition-fast), background var(--transition-fast);
+    }
+    nav a:hover{color:var(--accent)}
+    /* animated underline indicator */
+    .nav-underline { position:absolute; left:0; height:3px; bottom:8px; background:linear-gradient(90deg,var(--accent),var(--accent-2)); border-radius:3px; transition: transform var(--transition-medium), width var(--transition-medium), left var(--transition-medium); will-change:left,width; pointer-events:none; }
+
+    /* mobile */
+    #hamburger{display:none;border:none;background:transparent;font-size:22px;padding:8px;border-radius:8px;cursor:pointer}
+    #hamburger:focus{outline:2px solid var(--accent)}
+    .mobile-nav { display:none; position:fixed; right:16px; top:84px; background:var(--card); padding:12px; border-radius:10px; box-shadow:var(--shadow); min-width:220px; z-index:60; }
+    .mobile-nav.open{display:block}
+
+    /* ========== HERO ========== */
+    .hero{
+      display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:center;margin-top:120px;margin-bottom:40px;padding:18px;
+    }
+    .hero-card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      padding:28px;border-radius:18px;box-shadow:var(--shadow);overflow:visible;position:relative;
+      transform-origin:center;
+    }
+    .headline{font-size:30px;color:var(--muted);margin:0 0 8px}
+    .intro{font-size:16px;color:var(--muted-2);margin:0 0 16px;max-width:72ch}
+    .cta{display:flex;gap:12px;align-items:center}
+    .btn{
+      display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;font-weight:700;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;
+      box-shadow: 0 14px 30px rgba(11,118,239,0.12);cursor:pointer;border:none;transform:translateZ(0);
+      transition: transform var(--transition-fast) cubic-bezier(.2,.9,.3,1), box-shadow var(--transition-fast);
+    }
+    .btn:hover{transform:translateY(-6px) scale(1.02)}
+    .secondary{
+      padding:10px 14px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--muted-2);
+      cursor:pointer; transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .hero-side{display:flex;flex-direction:column;gap:12px}
+    .profile{
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
+      border-radius:14px;padding:16px;display:flex;gap:14px;align-items:center;border:1px solid var(--glass-2);
+      transform-style: preserve-3d;
+    }
+    .avatar{
+      width:90px;height:90px;border-radius:14px;background:linear-gradient(135deg,#fff,#eee);
+      overflow:hidden;flex-shrink:0;border:1px solid var(--glass);
+      display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--muted);
+    }
+    .small{font-size:13px;color:var(--muted-2)}
+
+    /* ========== SECTIONS ========== */
+    section{margin:24px 0}
+    h2{margin:0 0 12px;color:var(--muted);font-size:20px;letter-spacing:0.2px}
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+
+    /* skill progress */
+    .skill{
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), transparent); padding:16px;border-radius:12px;box-shadow:var(--shadow);
+    }
+    .skill .label{display:flex;justify-content:space-between;font-weight:700;color:var(--muted-2);margin-bottom:8px}
+    .progress{height:10px;background:var(--glass-2);border-radius:8px;overflow:hidden}
+    .progress > i{display:block;height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition: width var(--transition-slow) cubic-bezier(.2,.9,.3,1);}
+
+    /* project card */
+    .project-card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
+      padding:14px;border-radius:12px;box-shadow:var(--shadow);overflow:hidden;transform-style:preserve-3d;
+      transition: transform var(--transition-fast) cubic-bezier(.2,.9,.3,1), box-shadow var(--transition-fast);
+      will-change: transform;
+      position:relative;
+    }
+    .project-card .thumb{height:140px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);border-radius:10px;overflow:hidden;margin-bottom:10px;display:flex;align-items:center;justify-content:center}
+    .project-card h3{margin:0 0 6px;color:var(--muted)}
+    .project-meta{font-size:13px;color:var(--muted-2);}
+
+    /* project filter */
+    .filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+    .filter-btn{padding:8px 12px;border-radius:10px;background:transparent;border:1px solid var(--glass-2);cursor:pointer;font-weight:700;color:var(--muted-2);transition: transform var(--transition-fast), background var(--transition-fast)}
+    .filter-btn.active{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:white;transform:translateY(-4px)}
+
+    /* accordion */
+    .acc-btn{width:100%;text-align:left;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.02); background:transparent; cursor:pointer; font-weight:700; display:flex;justify-content:space-between;align-items:center}
+    .acc-panel{max-height:0;overflow:hidden;transition:max-height 380ms ease, padding 380ms ease;}
+    .acc-panel.open{max-height:520px;padding:12px 0}
+
+    /* modal */
+    .modal-backdrop{ position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(2,6,12,0.6); z-index:200; padding:20px;}
+    .modal-backdrop.open{display:flex; animation: fadeIn 240ms ease both;}
+    .modal{
+      max-width:900px;width:100%; background:var(--card); border-radius:12px; padding:18px; box-shadow:var(--shadow); transform:translateY(12px); animation: slideIn 320ms cubic-bezier(.2,.9,.3,1) both;
+    }
+    @keyframes fadeIn { from { opacity:0 } to { opacity:1 } }
+    @keyframes slideIn { from { transform: translateY(18px); opacity:0 } to { transform: translateY(0); opacity:1 } }
+
+    /* back to top btn */
+    .top-btn{
+      position:fixed;right:18px;bottom:18px;padding:10px;border-radius:12px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:white;box-shadow:var(--shadow);
+      display:none;align-items:center;justify-content:center;cursor:pointer; transition: transform var(--transition-fast), opacity var(--transition-fast);
+      z-index:150;
+    }
+
+    /* reveal animations & hover micro */
+    .reveal-on-scroll { opacity: 0; transform: translateY(22px) scale(.995); transition: opacity 520ms ease, transform 520ms ease; }
+    .reveal-on-scroll.is-visible { opacity: 1; transform: translateY(0) scale(1); }
+    .project-card:hover { transform: translateY(-10px) rotateX(2deg); box-shadow: 0 28px 60px rgba(2,6,12,0.45); }
+
+    /* small screens */
+    @media (max-width:880px){
+      .hero{grid-template-columns:1fr;gap:18px;margin-top:96px}
+      nav ul{display:none}
+      #hamburger{display:inline-flex}
+    }
+
+    /* helpful utilities */
+    .muted{color:var(--muted-2)}
+    .flex{display:flex;gap:12px;align-items:center}
+    .spaced{display:flex;justify-content:space-between;align-items:center}
+    .center{display:flex;align-items:center;justify-content:center}
+  </style>
+</head>
+
+<body>
+
+  <div class="container" id="top">
+    <!-- NAV -->
+    <header>
+      <div class="nav-wrap">
+        <div class="nav" id="nav">
+          <div class="brand">
+            <div class="logo" aria-hidden="true">JAMMI</div>
+            <div>
+              <div style="font-weight:800;color:var(--muted)">SANGEETHA RAO</div>
+              <div style="font-size:12px;color:var(--muted-2)">Web Developer • Student</div>
+            </div>
+          </div>
+
+          <nav style="position:relative;">
+            <ul id="menu">
+              <li><a href="#home" class="nav-link">Home</a></li>
+              <li><a href="#about" class="nav-link">About</a></li>
+              <li><a href="#skills" class="nav-link">Skills</a></li>
+              <li><a href="#projects" class="nav-link">Projects</a></li>
+              <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-underline" id="navUnderline" style="width:64px;left:0;"></div>
+          </nav>
+
+          <div class="flex">
+            <button id="themeToggle" class="secondary" title="Toggle theme" aria-pressed="false">🌙</button>
+            <button id="hamburger" aria-label="Open menu" aria-expanded="false">☰</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile nav -->
+      <div id="mobileNav" class="mobile-nav" aria-hidden="true">
+        <ul style="list-style:none;padding:0;margin:0;">
+          <li style="margin:6px 0"><a href="#home" class="nav-link">Home</a></li>
+          <li style="margin:6px 0"><a href="#about" class="nav-link">About</a></li>
+          <li style="margin:6px 0"><a href="#skills" class="nav-link">Skills</a></li>
+          <li style="margin:6px 0"><a href="#projects" class="nav-link">Projects</a></li>
+          <li style="margin:6px 0"><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <section id="home" class="hero reveal-on-scroll">
+      <div class="hero-card">
+        <h1 class="headline">Hi, I'm <span style="color:var(--accent)">Sangeetha Rao</span></h1>
+        <p class="intro">I design and build clean, accessible web experiences. I’m focused on front-end development and embedded systems while learning every day.</p>
+
+        <div style="margin-bottom:12px">
+          <span class="small">I code in</span>
+          <div id="typing" style="font-weight:800;color:var(--accent);margin-top:8px;font-size:16px">HTML • CSS • JavaScript • Python</div>
+        </div>
+
+        <div class="cta">
+          <button class="btn" id="seeProjectsBtn">See projects</button>
+          <a class="secondary" href="#contact">Contact</a>
+        </div>
+
+        <!-- subtle decorative animated gradient -->
+        <div style="position:absolute;right:-40px;bottom:-40px;width:220px;height:220px;border-radius:40%;filter:blur(60px);opacity:0.12;background:linear-gradient(90deg,var(--accent),var(--accent-2));pointer-events:none"></div>
+      </div>
+
+      <aside class="hero-side">
+        <div class="profile reveal-on-scroll" id="profileCard">
+          <div class="avatar" id="avatarEl" aria-hidden="true">JAMMI</div>
+          <div>
+            <div style="font-weight:800;color:var(--muted)">Sangeetha Rao</div>
+            <div class="small">4th Year ECE • Learner</div>
+            <div class="small" style="margin-top:8px">Based in India</div>
+          </div>
+        </div>
+
+        <div class="card reveal-on-scroll" style="background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);padding:12px;border-radius:12px;box-shadow:var(--shadow);">
+          <div style="font-weight:700;margin-bottom:6px">Quick Info</div>
+          <div class="small">Open to work/intrnships • Always learning • Love embedded & front-end</div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="reveal-on-scroll">
+      <div class="hero-card">
+        <h2>About Me</h2>
+        <p class="muted" style="margin-top:8px">
+          I’m a student building projects to learn real skills. My focus areas: Embedded Systems, Front-end Web, and small full-stack experiments. I enjoy clear design, performance and accessibility.
+        </p>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="spaced" style="align-items:center;margin-bottom:10px">
+        <h2 class="reveal-on-scroll">Skills</h2>
+        <div class="muted small">Drag mouse on project cards for a 3D tilt ✨</div>
+      </div>
+
+      <div class="cards" id="skillsList">
+        <!-- JS populates; includes animated progress bars -->
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="spaced" style="align-items:center;margin-bottom:12px">
+        <h2 class="reveal-on-scroll">Projects</h2>
+        <div class="filters" id="filters">
+          <!-- filter buttons injected by JS -->
+        </div>
+      </div>
+
+      <div class="cards" id="projectsList">
+        <!-- Project cards populated by JS -->
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="reveal-on-scroll">
+      <h2>Contact</h2>
+      <div class="contact-card">
+        <form id="contactForm" novalidate>
+          <div class="row" style="margin-bottom:12px">
+            <input type="text" id="name" placeholder="Your name" required />
+            <input type="email" id="email" placeholder="Email" required />
+          </div>
+          <textarea id="message" placeholder="Your message" required></textarea>
+          <div style="margin-top:12px;display:flex;gap:12px;align-items:center">
+            <button type="submit" class="btn">Send message</button>
+            <div id="formMsg" class="small muted"></div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <footer style="margin-top:28px;text-align:center;color:var(--muted-2)">
+      Built with ❤️ — copy, edit & personalize.
+    </footer>
+  </div>
+
+  <!-- Modal for project preview -->
+  <div id="modalBackdrop" class="modal-backdrop" role="dialog" aria-hidden="true">
+    <div class="modal" role="document" aria-modal="true" id="modal">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <div style="font-weight:800;font-size:18px" id="modalTitle">Project</div>
+        <button id="modalClose" class="secondary">Close</button>
+      </div>
+      <div id="modalContent" style="color:var(--muted-2);font-size:15px">Project details...</div>
+    </div>
+  </div>
+
+  <button id="topBtn" aria-label="Back to top" class="top-btn">↑</button>
+
+  <script>
+    /************************************************************************
+     * Enhanced portfolio JS
+     * - data (skills & projects)
+     * - populate DOM
+     * - reveal on scroll (staggered)
+     * - nav underline indicator
+     * - sticky nav shadow
+     * - progress bar animation
+     * - project filters + modal preview
+     * - card tilt interaction (mouse)
+     * - typing effect
+     * - theme toggle (light/dark)
+     * - contact validation
+     ************************************************************************/
+
+    // -----------------------
+    // Data: edit these values
+    // -----------------------
+    const data = {
+      avatarText: "YN",
+      skills: [
+        { name: "HTML", level: 95 },
+        { name: "CSS", level: 92 },
+        { name: "JavaScript", level: 85 },
+        { name: "Responsive Design", level: 90 },
+        { name: "Git", level: 80 },
+        { name: "Firebase (basic)", level: 70 }
+      ],
+      projects: [
+        { id: "p1", title: "Portfolio Website", desc: "This site: responsive, animated, theme toggle.", details: "Built from scratch: responsive layout, animated reveal, project modal, filter & tilt interactions. Tech: HTML/CSS/JS.", tags: ["Web"], link: "#" },
+        { id: "p2", title: "To-Do App", desc: "Vanilla JS to-do with localStorage.", details: "Create/update/delete tasks, persists with localStorage; stores timestamp. Tech: JS, localStorage.", tags: ["Web","JS"], link: "#" },
+        { id: "p3", title: "Firebase File Viewer", desc: "Upload and preview files (audio/pdf).", details: "Prototype: upload files, preview in UI. Tech: Firebase storage + metadata.", tags: ["Web","Firebase"], link: "#" },
+        { id: "p4", title: "Embedded Sensor Demo", desc: "Sensor readout + simple dashboard.", details: "Serial data streaming demo, visualized on a small web dashboard. Tech: Embedded + Web.", tags: ["Embedded"], link: "#" }
+      ]
+    };
+
+    // Helper
+    const $ = (sel, ctx=document) => ctx.querySelector(sel);
+    const $$ = (sel, ctx=document) => Array.from(ctx.querySelectorAll(sel));
+
+    // -----------------------
+    // Populate skills
+    // -----------------------
+    const skillsEl = document.getElementById('skillsList');
+    data.skills.forEach((s, idx) => {
+      const el = document.createElement('div');
+      el.className = 'skill reveal-on-scroll';
+      el.innerHTML = `
+        <div class="label"><span>${s.name}</span><span>${s.level}%</span></div>
+        <div class="progress"><i style="transition-delay:${idx*80}ms"></i></div>
+      `;
+      skillsEl.appendChild(el);
+    });
+
+    // Animate progress bars when visible
+    function animateSkillBars() {
+      document.querySelectorAll('.skill').forEach((skill, idx) => {
+        const levelText = skill.querySelector('.label span:nth-child(2)').textContent;
+        const pct = parseInt(levelText);
+        const bar = skill.querySelector('.progress > i');
+        setTimeout(()=> bar.style.width = pct + '%', idx * 120);
+      });
+    }
+
+    // -----------------------
+    // Populate filters & projects
+    // -----------------------
+    const filtersEl = document.getElementById('filters');
+    const projectsEl = document.getElementById('projectsList');
+
+    // unique tags
+    const tags = Array.from(new Set(data.projects.flatMap(p => p.tags)));
+    const allBtn = document.createElement('button'); allBtn.className='filter-btn active'; allBtn.textContent='All'; allBtn.dataset.filter='all';
+    filtersEl.appendChild(allBtn);
+    tags.forEach(tag=>{
+      const b = document.createElement('button'); b.className='filter-btn'; b.textContent = tag; b.dataset.filter=tag; filtersEl.appendChild(b);
+    });
+
+    function renderProjects(filter='all'){
+      projectsEl.innerHTML = '';
+      const list = data.projects.filter(p => filter === 'all' ? true : p.tags.includes(filter));
+      list.forEach((p, idx) => {
+        const card = document.createElement('article');
+        card.className = 'project-card reveal-on-scroll';
+        card.dataset.id = p.id;
+        // sample image area (replace with actual <img loading="lazy"> if available)
+        card.innerHTML = `
+          <div class="thumb" aria-hidden="true"><div style="font-weight:700;color:var(--muted-2)">${p.title}</div></div>
+          <h3>${p.title}</h3>
+          <p class="project-meta">${p.desc}</p>
+          <div style="margin-top:12px;display:flex;gap:10px;align-items:center;justify-content:space-between">
+            <div style="display:flex;gap:8px">
+              <button class="secondary open-modal" data-id="${p.id}">View</button>
+              <button class="acc-btn">Details <span class="acc-icon">▼</span></button>
+            </div>
+            <div style="font-size:13px;color:var(--muted-2)">${p.tags.join(', ')}</div>
+          </div>
+          <div class="acc-panel" aria-hidden="true"><div style="font-size:14px;color:var(--muted-2);margin-top:10px">${p.details}</div></div>
+        `;
+        // stagger delay
+        card.style.transitionDelay = (idx * 80) + 'ms';
+        projectsEl.appendChild(card);
+      });
+      // attach tilt listeners after render
+      attachCardTilt();
+    }
+
+    // initial render
+    renderProjects();
+    
+    // filter click handling (delegated)
+    filtersEl.addEventListener('click', (e) => {
+      const btn = e.target.closest('.filter-btn');
+      if(!btn) return;
+      filtersEl.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      renderProjects(f === 'all' ? 'all' : f);
+      // re-run reveal observer on new nodes (observer logic will pick up)
+      observeReveals();
+    });
+
+    // -----------------------
+    // Reveal on scroll (IntersectionObserver)
+    // -----------------------
+    let revealObserver;
+    function observeReveals(){
+      if(revealObserver) revealObserver.disconnect();
+      const revealEls = Array.from(document.querySelectorAll('.reveal-on-scroll'));
+      const options = { root: null, rootMargin: "0px 0px -12% 0px", threshold: 0.12 };
+      revealObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting){
+            entry.target.classList.add('is-visible');
+            // animate skill bars when first skills visible
+            if(entry.target.closest('#skillsList') || entry.target.id === 'skillsList') animateSkillBars();
+            obs.unobserve(entry.target);
+          }
+        });
+      }, options);
+      revealEls.forEach((el, i) => {
+        // stagger via style delay if not set
+        if(!el.style.transitionDelay) el.style.transitionDelay = (i * 70) + 'ms';
+        revealObserver.observe(el);
+      });
+    }
+    observeReveals();
+
+    // -----------------------
+    // Nav underline indicator
+    // -----------------------
+    const navUnderline = document.getElementById('navUnderline');
+    function positionUnderlineFor(linkEl){
+      if(!linkEl) return;
+      const rect = linkEl.getBoundingClientRect();
+      const parentRect = linkEl.closest('nav').getBoundingClientRect();
+      const left = rect.left - parentRect.left;
+      navUnderline.style.left = left + 'px';
+      navUnderline.style.width = rect.width + 'px';
+    }
+    // on load position underline on Home
+    const firstNav = document.querySelector('.nav-link[href="#home"]');
+    setTimeout(()=> positionUnderlineFor(firstNav), 200);
+
+    // On scroll highlight nav links & move underline
+    const navLinks = Array.from(document.querySelectorAll('.nav-link'));
+    function updateActiveNav(){
+      const fromTop = window.scrollY + 120;
+      let current = navLinks[0];
+      navLinks.forEach(link=>{
+        const href = link.getAttribute('href');
+        if(!href || !href.startsWith('#')) return;
+        const sec = document.querySelector(href);
+        if(!sec) return;
+        if(sec.offsetTop <= fromTop && sec.offsetTop + sec.offsetHeight > fromTop){
+          current = link;
+        }
+      });
+      navLinks.forEach(l=>l.classList.remove('active'));
+      current.classList.add('active');
+      // underline
+      positionUnderlineFor(current);
+    }
+
+    window.addEventListener('scroll', () => {
+      updateActiveNav();
+      // sticky nav shadow
+      const nav = document.getElementById('nav');
+      if(window.scrollY > 24) nav.classList.add('sticky'); else nav.classList.remove('sticky');
+      // back to top
+      const topBtn = document.getElementById('topBtn');
+      topBtn.style.display = (window.scrollY > 400) ? 'flex' : 'none';
+    });
+
+    // nav clicks smooth
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        const href = a.getAttribute('href');
+        if(!href || href === '#') return;
+        e.preventDefault();
+        closeMobileNav();
+        document.querySelector(href).scrollIntoView({behavior:'smooth',block:'start'});
+      });
+    });
+
+    // -----------------------
+    // Project modal
+    // -----------------------
+    const modalBackdrop = document.getElementById('modalBackdrop');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalContent = document.getElementById('modalContent');
+    const modalClose = document.getElementById('modalClose');
+
+    document.addEventListener('click', (e) => {
+      const openBtn = e.target.closest('.open-modal');
+      if(openBtn){
+        const id = openBtn.dataset.id;
+        const proj = data.projects.find(p => p.id === id);
+        if(proj){
+          modalTitle.textContent = proj.title;
+          modalContent.innerHTML = `<p style="margin-top:6px;color:var(--muted-2)">${proj.details}</p><div style="margin-top:10px"><a href="${proj.link}" target="_blank" class="btn">Open Project</a></div>`;
+          openModal();
+        }
+      }
+    });
+
+    function openModal(){
+      modalBackdrop.classList.add('open');
+      modalBackdrop.setAttribute('aria-hidden','false');
+    }
+    function closeModal(){
+      modalBackdrop.classList.remove('open');
+      modalBackdrop.setAttribute('aria-hidden','true');
+    }
+    modalClose.addEventListener('click', closeModal);
+    modalBackdrop.addEventListener('click', (e)=>{ if(e.target === modalBackdrop) closeModal(); });
+
+    // -----------------------
+    // Accordion toggle for details
+    // -----------------------
+    document.addEventListener('click', (e) => {
+      if(e.target.closest('.acc-btn')){
+        const btn = e.target.closest('.acc-btn');
+        const panel = btn.parentElement.nextElementSibling;
+        const open = panel.classList.toggle('open');
+        panel.setAttribute('aria-hidden', !open);
+        btn.setAttribute('aria-expanded', open);
+        const icon = btn.querySelector('.acc-icon') || btn.querySelector('span');
+        if(icon) icon.style.transform = open ? 'rotate(180deg)' : 'rotate(0deg)';
+      }
+    });
+
+    // -----------------------
+    // Card tilt interaction (3D) - attach to visible cards
+    // -----------------------
+    function attachCardTilt(){
+      $$('.project-card').forEach(card => {
+        // remove old handlers if any
+        card.onmousemove = null; card.onmouseleave = null;
+        card.addEventListener('mousemove', function(e){
+          const rect = card.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width; // 0..1
+          const y = (e.clientY - rect.top) / rect.height;
+          const rx = (y - 0.5) * 6; // rotateX
+          const ry = (x - 0.5) * -8; // rotateY
+          card.style.transform = `perspective(900px) translateZ(0) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-6px)`;
+        });
+        card.addEventListener('mouseleave', function(){
+          card.style.transform = `translateY(0) rotateX(0) rotateY(0)`;
+        });
+      });
+    }
+    // run initially
+    attachCardTilt();
+
+    // -----------------------
+    // Typing effect
+    // -----------------------
+    (function typing(){
+      const el = document.getElementById('typing');
+      const list = ["HTML", "CSS", "JavaScript", "Responsive Design", "Accessible UI"];
+      let i = 0, j = 0, forward = true;
+      function tick(){
+        const full = list[i];
+        el.textContent = full.slice(0, j);
+        if(forward){ j++; if(j>full.length){ forward=false; setTimeout(tick,700); return; } }
+        else{ j--; if(j===0){ forward=true; i=(i+1)%list.length; } }
+        setTimeout(tick, 80);
+      }
+      tick();
+    })();
+
+    // -----------------------
+    // Theme toggle (light/dark)
+    // -----------------------
+    const themeToggle = document.getElementById('themeToggle');
+    function setTheme(t){
+      if(t === 'light') document.documentElement.setAttribute('data-theme','light');
+      else document.documentElement.removeAttribute('data-theme');
+      localStorage.setItem('theme', t);
+      themeToggle.textContent = t === 'light' ? '☀️' : '🌙';
+      themeToggle.setAttribute('aria-pressed', t === 'light');
+    }
+    const savedTheme = localStorage.getItem('theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    setTheme(savedTheme === 'light' ? 'light' : 'dark');
+    themeToggle.addEventListener('click', () => {
+      const cur = document.documentElement.hasAttribute('data-theme') ? 'light' : 'dark';
+      setTheme(cur === 'light' ? 'dark' : 'light');
+    });
+
+    // -----------------------
+    // Mobile hamburger
+    // -----------------------
+    const ham = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    function openMobileNav(){ mobileNav.classList.add('open'); mobileNav.setAttribute('aria-hidden','false'); ham.setAttribute('aria-expanded','true'); }
+    function closeMobileNav(){ mobileNav.classList.remove('open'); mobileNav.setAttribute('aria-hidden','true'); ham.setAttribute('aria-expanded','false'); }
+    ham.addEventListener('click', ()=> mobileNav.classList.toggle('open'));
+
+    document.addEventListener('click', (e) => {
+      if(!mobileNav.contains(e.target) && !ham.contains(e.target)) closeMobileNav();
+    });
+
+    function closeMobileNav(){ mobileNav.classList.remove('open'); mobileNav.setAttribute('aria-hidden','true'); ham.setAttribute('aria-expanded','false'); }
+
+    // -----------------------
+    // Contact form validation (simple)
+    // -----------------------
+    document.getElementById('contactForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const name = $('#name').value.trim();
+      const email = $('#email').value.trim();
+      const message = $('#message').value.trim();
+      const msg = $('#formMsg');
+      function validEmail(e){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e) }
+      if(!name || !email || !message){ msg.textContent = 'Please fill all fields.'; return; }
+      if(!validEmail(email)){ msg.textContent = 'Enter a valid email.'; return; }
+      msg.textContent = 'Thanks — message simulated as sent!';
+      this.reset();
+      setTimeout(()=> msg.textContent = '', 3200);
+    });
+
+    // -----------------------
+    // Back to top
+    // -----------------------
+    document.getElementById('topBtn').addEventListener('click', ()=> document.getElementById('top').scrollIntoView({behavior:'smooth'}));
+
+    // -----------------------
+    // Show projects button
+    // -----------------------
+    document.getElementById('seeProjectsBtn').addEventListener('click', ()=> document.getElementById('projects').scrollIntoView({behavior:'smooth'}));
+
+    // -----------------------
+    // Re-observe dynamic reveals if needed
+    // -----------------------
+    // Called after renderProjects
+    function reInit(){
+      observeReveals();
+      attachCardTilt();
+      animateSkillBars();
+    }
+    // run once after load
+    window.addEventListener('load', reInit);
+
+    // Accessibility: keyboard close modal
+    window.addEventListener('keydown', (e)=> { if(e.key === 'Escape') closeModal(); });
+
+    // Initial nav active update
+    setTimeout(()=> updateActiveNav(), 300);
+  </script>
+</body>
+</html>
