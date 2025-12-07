@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>JAMMI SANGEETHA RAO — Portfolio</title>
-  <meta name="description" content="JAMMI SANGEETHA RAO — web developer / student / designer" />
+  <meta name="description" content="Portfolio of Your Name — web developer / student / designer" />
 
   <!-- Google font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -80,6 +80,7 @@
       transition: background var(--transition-medium) ease, color var(--transition-medium) ease;
       min-height: 100vh;
       overflow-x: hidden;
+      position: relative;
     }
 
     a {
@@ -104,7 +105,7 @@
       left: 0;
       right: 0;
       top: 12px;
-      z-index: 60;
+      z-index: 200;
       backdrop-filter: blur(6px);
       display: flex;
       justify-content: center;
@@ -218,21 +219,71 @@
       outline: 2px solid var(--accent)
     }
 
+    /* MOBILE SIDE NAV (off‑canvas) */
     .mobile-nav {
-      display: none;
       position: fixed;
-      right: 16px;
-      top: 84px;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 260px;
+      max-width: 80%;
       background: var(--card);
-      padding: 12px;
-      border-radius: 10px;
+      padding: 16px;
       box-shadow: var(--shadow);
-      min-width: 220px;
-      z-index: 60;
+      z-index: 210;
+      transform: translateX(100%);
+      transition: transform var(--transition-medium) ease;
+      display: flex;
+      flex-direction: column;
     }
 
     .mobile-nav.open {
-      display: block
+      transform: translateX(0);
+    }
+
+    body.drawer-open {
+      overflow: hidden;
+    }
+
+    body.drawer-open::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      z-index: 205;
+    }
+
+    .mobile-nav-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .mobile-title {
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .mobile-nav-links {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 16px;
+    }
+
+    .mobile-nav-links li {
+      margin: 6px 0;
+    }
+
+    .mobile-nav-links a {
+      display: block;
+      padding: 8px 4px;
+      color: var(--muted-2);
+      font-weight: 600;
+    }
+
+    .mobile-extra {
+      margin-top: auto;
     }
 
     .hero {
@@ -303,6 +354,9 @@
       color: var(--muted-2);
       cursor: pointer;
       transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .secondary:hover {
@@ -504,7 +558,7 @@
       align-items: center;
       justify-content: center;
       background: rgba(2, 6, 12, 0.6);
-      z-index: 200;
+      z-index: 300;
       padding: 20px;
     }
 
@@ -560,7 +614,7 @@
       justify-content: center;
       cursor: pointer;
       transition: transform var(--transition-fast), opacity var(--transition-fast);
-      z-index: 150;
+      z-index: 250;
     }
 
     .top-btn:hover {
@@ -597,7 +651,9 @@
         display: inline-flex
       }
 
-      .nav-underline { display: none; }
+      .nav-underline {
+        display: none;
+      }
     }
 
     .muted {
@@ -701,6 +757,7 @@
 <body>
 
   <div class="container" id="top">
+    <!-- NAV -->
     <header>
       <div class="nav-wrap">
         <div class="nav" id="nav">
@@ -730,19 +787,29 @@
           </div>
         </div>
       </div>
-
-      <div id="mobileNav" class="mobile-nav" aria-hidden="true">
-        <ul style="list-style:none;padding:0;margin:0;">
-          <li style="margin:6px 0"><a href="#home" class="nav-link">Home</a></li>
-          <li style="margin:6px 0"><a href="#about" class="nav-link">About</a></li>
-          <li style="margin:6px 0"><a href="#skills" class="nav-link">Skills</a></li>
-          <li style="margin:6px 0"><a href="#projects" class="nav-link">Projects</a></li>
-          <li style="margin:6px 0"><a href="#certifications" class="nav-link">Certifications</a></li>
-          <li style="margin:6px 0"><a href="#contact" class="nav-link">Contact</a></li>
-        </ul>
-      </div>
     </header>
 
+    <!-- MOBILE SIDE NAV -->
+    <div id="mobileNav" class="mobile-nav" aria-hidden="true">
+      <div class="mobile-nav-header">
+        <span class="mobile-title">Menu</span>
+        <button id="mobileClose" class="secondary" aria-label="Close menu">✕</button>
+      </div>
+      <ul class="mobile-nav-links">
+        <li><a href="#home" class="nav-link">Home</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#certifications" class="nav-link">Certifications</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="mobile-extra">
+        <a href="#contact" class="btn" style="width:100%;justify-content:center;margin-bottom:8px;">Say hi</a>
+        <button id="mobileThemeToggle" class="secondary" style="width:100%;justify-content:center;">Toggle theme</button>
+      </div>
+    </div>
+
+    <!-- HERO -->
     <section id="home" class="hero reveal-on-scroll">
       <div class="hero-card">
         <h1 class="headline">Hi, I'm <span style="color:var(--accent)">Sangeetha Rao</span></h1>
@@ -778,6 +845,7 @@
       </aside>
     </section>
 
+    <!-- ABOUT -->
     <section id="about" class="reveal-on-scroll">
       <div class="hero-card">
         <h2>About Me</h2>
@@ -787,6 +855,7 @@
       </div>
     </section>
 
+    <!-- SKILLS -->
     <section id="skills">
       <div class="spaced" style="align-items:center;margin-bottom:10px">
         <h2 class="reveal-on-scroll">Skills</h2>
@@ -796,6 +865,7 @@
       <div class="cards" id="skillsList"></div>
     </section>
 
+    <!-- PROJECTS -->
     <section id="projects">
       <div class="spaced" style="align-items:center;margin-bottom:12px">
         <h2 class="reveal-on-scroll">Projects</h2>
@@ -805,6 +875,7 @@
       <div class="cards" id="projectsList"></div>
     </section>
 
+    <!-- CERTIFICATIONS -->
     <section id="certifications" class="reveal-on-scroll">
       <h2>Certifications</h2>
       <div class="cert-card">
@@ -844,6 +915,7 @@
       </div>
     </section>
 
+    <!-- CONTACT -->
     <section id="contact" class="reveal-on-scroll">
       <h2>Contact</h2>
       <div class="contact-card">
@@ -866,6 +938,7 @@
     </footer>
   </div>
 
+  <!-- Shared modal -->
   <div id="modalBackdrop" class="modal-backdrop" role="dialog" aria-hidden="true">
     <div class="modal" role="document" aria-modal="true" id="modal">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
@@ -1036,8 +1109,9 @@
     const navLinks = Array.from(document.querySelectorAll('.nav-link'));
 
     function positionUnderlineFor(linkEl, instant = false) {
-      if (!linkEl) return;
+      if (!linkEl || !navUnderline) return;
       const navContainer = linkEl.closest('nav');
+      if (!navContainer) return;
       const rect = linkEl.getBoundingClientRect();
       const parentRect = navContainer.getBoundingClientRect();
       const left = rect.left - parentRect.left;
@@ -1167,6 +1241,7 @@
       });
 
       const themeToggle = document.getElementById('themeToggle');
+      const mobileThemeToggle = document.getElementById('mobileThemeToggle');
       const root = document.documentElement;
       const savedTheme = localStorage.getItem('theme');
       if (savedTheme === 'light') {
@@ -1175,35 +1250,68 @@
         themeToggle.setAttribute('aria-pressed', 'true');
       }
 
-      themeToggle.addEventListener('click', () => {
-        const isLight = root.getAttribute('data-theme') === 'light';
+      function applyTheme(isLight) {
         if (isLight) {
-          root.removeAttribute('data-theme');
-          themeToggle.textContent = '🌙';
-          themeToggle.setAttribute('aria-pressed', 'false');
-          localStorage.setItem('theme', 'dark');
-        } else {
           root.setAttribute('data-theme', 'light');
           themeToggle.textContent = '☀️';
           themeToggle.setAttribute('aria-pressed', 'true');
           localStorage.setItem('theme', 'light');
+        } else {
+          root.removeAttribute('data-theme');
+          themeToggle.textContent = '🌙';
+          themeToggle.setAttribute('aria-pressed', 'false');
+          localStorage.setItem('theme', 'dark');
         }
+      }
+
+      themeToggle.addEventListener('click', () => {
+        const isLight = root.getAttribute('data-theme') !== 'light';
+        applyTheme(isLight);
+      });
+      mobileThemeToggle.addEventListener('click', () => {
+        const isLight = root.getAttribute('data-theme') !== 'light';
+        applyTheme(isLight);
       });
 
       const hamburger = document.getElementById('hamburger');
       const mobileNav = document.getElementById('mobileNav');
+      const mobileClose = document.getElementById('mobileClose');
+
+      function openDrawer() {
+        mobileNav.classList.add('open');
+        document.body.classList.add('drawer-open');
+        hamburger.setAttribute('aria-expanded', 'true');
+        mobileNav.setAttribute('aria-hidden', 'false');
+      }
+
+      function closeDrawer() {
+        mobileNav.classList.remove('open');
+        document.body.classList.remove('drawer-open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        mobileNav.setAttribute('aria-hidden', 'true');
+      }
+
       hamburger.addEventListener('click', () => {
-        const isOpen = mobileNav.classList.toggle('open');
-        hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-        mobileNav.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+        if (mobileNav.classList.contains('open')) {
+          closeDrawer();
+        } else {
+          openDrawer();
+        }
       });
+
+      mobileClose.addEventListener('click', closeDrawer);
 
       mobileNav.addEventListener('click', (e) => {
         if (e.target.matches('.nav-link')) {
-          mobileNav.classList.remove('open');
-          mobileNav.setAttribute('aria-hidden', 'true');
-          hamburger.setAttribute('aria-expanded', 'false');
+          closeDrawer();
         }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!document.body.classList.contains('drawer-open')) return;
+        const withinDrawer = mobileNav.contains(e.target);
+        const isHamb = hamburger.contains(e.target);
+        if (!withinDrawer && !isHamb) closeDrawer();
       });
 
       const navEl = document.getElementById('nav');
@@ -1269,7 +1377,6 @@
       attachCertEvents();
       setupMisc();
 
-      // position underline for first nav item
       const current = navLinks[0];
       positionUnderlineFor(current, true);
     });
