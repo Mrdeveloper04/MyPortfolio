@@ -4,8 +4,44 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>JAMMI SANGEETHA RAO — Portfolio</title>
-  <meta name="description" content="JAMMI SANGEETHA RAO — web developer / student / designer" />
+  <title>JAMMI SANGEETHA RAO — Portfolio | Web Developer & Student</title>
+  <meta name="description"
+    content="Portfolio of JAMMI SANGEETHA RAO, a web developer and student focused on front-end development, responsive design, and embedded systems." />
+  <meta name="keywords"
+    content="Jammi Sangeetha Rao, web developer, front-end developer, portfolio, HTML, CSS, JavaScript, embedded systems, student" />
+  <meta name="author" content="JAMMI SANGEETHA RAO" />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://your-portfolio-domain.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="JAMMI SANGEETHA RAO — Portfolio" />
+  <meta property="og:description"
+    content="Web developer & student building clean, accessible web experiences and embedded systems demos." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://your-portfolio-domain.com/" />
+  <meta property="og:image" content="https://your-portfolio-domain.com/preview-image.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="JAMMI SANGEETHA RAO — Portfolio" />
+  <meta name="twitter:description"
+    content="Front-end web developer & student focusing on responsive interfaces and embedded systems." />
+  <meta name="twitter:image" content="https://your-portfolio-domain.com/preview-image.png" />
+
+  <!-- JSON-LD Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "JAMMI SANGEETHA RAO",
+    "url": "https://your-portfolio-domain.com/",
+    "jobTitle": "Web Developer & Student",
+    "sameAs": [
+      "https://www.linkedin.com/in/your-linkedin-username",
+      "https://wa.me/your-whatsapp-number-with-country-code"
+    ]
+  }
+  </script>
 
   <!-- Google font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -30,6 +66,7 @@
       --nav-height: 78px;
     }
 
+    /* LIGHT THEME OVERRIDES */
     [data-theme="light"] {
       --bg: #fbfbfc;
       --panel: rgba(255, 255, 255, 0.6);
@@ -41,6 +78,23 @@
       --glass: rgba(255, 255, 255, 0.6);
       --glass-2: rgba(0, 0, 0, 0.03);
       --shadow: 0 6px 20px rgba(18, 24, 40, 0.06);
+
+      /* Get Connected buttons in light mode */
+      .social-btn {
+        background: #0b76ef;
+        color: #ffffff;
+        border-color: rgba(11, 118, 239, 0.25);
+      }
+
+      .social-btn:hover {
+        background: #095bb6;
+        color: #ffffff;
+        box-shadow: 0 8px 20px rgba(9, 91, 182, 0.35);
+      }
+
+      .social-connect-label {
+        color: var(--muted-2);
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -63,7 +117,9 @@
 
     html,
     body {
-      height: 100%
+      height: 100%;
+      width: 100%;
+      overflow-x: hidden;
     }
 
     body {
@@ -79,7 +135,6 @@
       padding-bottom: 96px;
       transition: background var(--transition-medium) ease, color var(--transition-medium) ease;
       min-height: 100vh;
-      overflow-x: hidden;
       position: relative;
     }
 
@@ -114,7 +169,7 @@
 
     .nav-wrap {
       width: 100%;
-      max-width: var(--max-width);
+      max-width: 100%;
       padding: 8px 12px;
       pointer-events: auto;
     }
@@ -219,7 +274,7 @@
       outline: 2px solid var(--accent)
     }
 
-    /* MOBILE SIDE NAV (off‑canvas) */
+    /* MOBILE SIDE NAV (off-canvas) */
     .mobile-nav {
       position: fixed;
       right: 0;
@@ -293,7 +348,7 @@
       align-items: center;
       margin-top: 120px;
       margin-bottom: 40px;
-      padding: 18px;
+      padding: 18px 0;
     }
 
     .hero-card {
@@ -518,6 +573,10 @@
       font-weight: 700;
       color: var(--muted-2);
       transition: transform var(--transition-fast), background var(--transition-fast), color var(--transition-fast)
+    }
+
+    .filter-btn:hover {
+      transform: translateY(-2px)
     }
 
     .filter-btn.active {
@@ -751,6 +810,47 @@
       display: block;
       margin: 0 auto;
     }
+
+    /* Get Connected social bar */
+    .social-connect {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .social-connect-label {
+      font-size: 13px;
+      color: var(--muted-2);
+      margin-right: 4px;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(15, 23, 42, 0.85);
+      color: var(--muted);
+      font-size: 13px;
+      cursor: pointer;
+      transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .social-btn:hover {
+      background: rgba(37, 99, 235, 0.9);
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.35);
+    }
+
+    /* prevent hero glow from causing horizontal scroll on very small screens */
+    .hero-card > div[style*="position:absolute"] {
+      max-width: 100vw;
+    }
   </style>
 </head>
 
@@ -813,11 +913,14 @@
     <section id="home" class="hero reveal-on-scroll">
       <div class="hero-card">
         <h1 class="headline">Hi, I'm <span style="color:var(--accent)">Sangeetha Rao</span></h1>
-        <p class="intro">I design and build clean, accessible web experiences. I’m focused on front-end development and embedded systems while learning every day.</p>
+        <p class="intro">I design and build clean, accessible web experiences. I’m focused on front-end development and
+          embedded systems while learning every day.</p>
 
         <div style="margin-bottom:12px">
           <span class="small">I code in</span>
-          <div id="typing" style="font-weight:800;color:var(--accent);margin-top:8px;font-size:16px">HTML • CSS • JavaScript • Python</div>
+          <div id="typing"
+            style="font-weight:800;color:var(--accent);margin-top:8px;font-size:16px">HTML • CSS • JavaScript • Python
+          </div>
         </div>
 
         <div class="cta">
@@ -825,9 +928,23 @@
           <a class="secondary" href="#contact">Contact</a>
         </div>
 
-        <div style="position:absolute;right:-40px;bottom:-40px;width:220px;height:220px;border-radius:40%;filter:blur(60px);opacity:0.12;background:linear-gradient(90deg,var(--accent),var(--accent-2));pointer-events:none"></div>
-      </div>
+        <!-- Get Connected buttons -->
+        <div class="social-connect" aria-label="Get connected on social platforms">
+          <span class="social-connect-label">Get connected:</span>
+          <a class="social-btn" href="https://www.linkedin.com/in/your-linkedin-username" target="_blank"
+            rel="noopener noreferrer">
+            <span>LinkedIn</span>
+          </a>
+          <a class="social-btn" href="https://wa.me/your-whatsapp-number-with-country-code" target="_blank"
+            rel="noopener noreferrer">
+            <span>WhatsApp</span>
+          </a>
+        </div>
 
+        <div
+          style="position:absolute;right:-40px;bottom:-40px;width:220px;height:220px;border-radius:40%;filter:blur(60px);opacity:0.12;background:linear-gradient(90deg,var(--accent),var(--accent-2));pointer-events:none">
+        </div>
+      </div>
       <aside class="hero-side">
         <div class="profile reveal-on-scroll" id="profileCard">
           <div class="avatar" id="avatarEl" aria-hidden="true">JAMMI</div>
@@ -838,9 +955,10 @@
           </div>
         </div>
 
-        <div class="card reveal-on-scroll" style="background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);padding:12px;border-radius:12px;box-shadow:var(--shadow);">
+        <div class="card reveal-on-scroll"
+          style="background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);padding:12px;border-radius:12px;box-shadow:var(--shadow);">
           <div style="font-weight:700;margin-bottom:6px">Quick Info</div>
-          <div class="small">Open to work/intrnships • Always learning • Love embedded & front-end</div>
+          <div class="small">Open to work/intrnships • Always learning • Love embedded &amp; front-end</div>
         </div>
       </aside>
     </section>
@@ -850,7 +968,8 @@
       <div class="hero-card">
         <h2>About Me</h2>
         <p class="muted" style="margin-top:8px">
-          I’m a student building projects to learn real skills. My focus areas: Embedded Systems, Front-end Web, and small full-stack experiments. I enjoy clear design, performance and accessibility.
+          I’m a student building projects to learn real skills. My focus areas: Embedded Systems, Front-end Web, and
+          small full-stack experiments. I enjoy clear design, performance and accessibility.
         </p>
       </div>
     </section>
@@ -879,13 +998,13 @@
     <section id="certifications" class="reveal-on-scroll">
       <h2>Certifications</h2>
       <div class="cert-card">
-        <p class="small muted" style="margin-bottom:10px">Selected certifications that highlight my skills and learning.</p>
+        <p class="small muted" style="margin-bottom:10px">Selected certifications that highlight my skills and
+          learning.</p>
         <div class="cert-list">
           <div class="cert-item project-card reveal-on-scroll">
             <strong>Salesforce Developer Virtual Internship</strong>
             <span> Salesforce • 2023</span>
-            <button
-              class="secondary open-cert"
+            <button class="secondary open-cert"
               data-title="Salesforce Developer Virtual Internship"
               data-img="https://raw.githubusercontent.com/Mrdeveloper04/MyPortfolio/aed291d077166545132f4b98c0605612581280c9/CERTIFICATES/salesforce.png">
               View certificate
@@ -893,9 +1012,8 @@
           </div>
           <div class="cert-item project-card reveal-on-scroll">
             <strong>Zscalar Zero Trust Associate (ZTCA) </strong>
-            <span>Zero Trust Architecture, Secure Access & Cloud Security Principles • 2025</span>
-            <button
-              class="secondary open-cert"
+            <span>Zero Trust Architecture, Secure Access &amp; Cloud Security Principles • 2025</span>
+            <button class="secondary open-cert"
               data-title="Zscalar Zero Trust Associate (ZTCA)"
               data-img="https://raw.githubusercontent.com/Mrdeveloper04/MyPortfolio/0a3b17b45ae8a26555edf6bacf1d3ff774c5741c/CERTIFICATES/ZScalar.png">
               View certificate
@@ -904,8 +1022,7 @@
           <div class="cert-item project-card reveal-on-scroll">
             <strong>NPTEL</strong>
             <span>Enhancing Soft Skills &amp; Personality • 2023</span>
-            <button
-              class="secondary open-cert"
+            <button class="secondary open-cert"
               data-title="NPTEL"
               data-img="https://raw.githubusercontent.com/Mrdeveloper04/MyPortfolio/a928f96b7765849ace9784c0113eb9830af38102/CERTIFICATES/NPTEL.png">
               View certificate
@@ -1152,6 +1269,23 @@
       sections.forEach(sec => sectionObserver.observe(sec));
     }
 
+    function attachCardTilt() {
+      const cards = $$('.project-card');
+      cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const rotateY = ((x / rect.width) - 0.5) * 10;
+          const rotateX = ((y / rect.height) - 0.5) * -10;
+          card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'rotateX(0deg) rotateY(0deg) translateY(0)';
+        });
+      });
+    }
+
     function attachProjectEvents() {
       const modalBackdrop = document.getElementById('modalBackdrop');
       const modalTitle = document.getElementById('modalTitle');
@@ -1198,23 +1332,6 @@
           modalContent.innerHTML = `<img src="${imgSrc}" alt="${title} certificate">`;
           modalBackdrop.classList.add('open');
           modalBackdrop.setAttribute('aria-hidden', 'false');
-        });
-      });
-    }
-
-    function attachCardTilt() {
-      const cards = $$('.project-card');
-      cards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-          const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-          const rotateY = ((x / rect.width) - 0.5) * 10;
-          const rotateX = ((y / rect.height) - 0.5) * -10;
-          card.style.transform = `perspective(700px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-2px)`;
-        });
-        card.addEventListener('mouseleave', () => {
-          card.style.transform = 'perspective(700px) rotateX(0deg) rotateY(0deg) translateY(0)';
         });
       });
     }
